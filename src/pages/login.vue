@@ -37,11 +37,11 @@
 </template>
 
 <script setup>
-import { ref,reactive } from 'vue'
-import { login,getInfo } from '~/api/manager'
-import { ElNotification } from 'element-plus'
+import { ref,reactive,onMounted,onBeforeUnmount} from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import { toast } from '~/composables/utils'
+const store = useStore()
 const router = useRouter()
 const form = reactive({
   username:"",
@@ -57,25 +57,23 @@ const onSubmit = () => {
     formRef.value.validate((valid)=>{
     if(!valid) return false
     loading.value = true
-    login(form.username,form.password)
-    .then(res=>{
-        loading.value = false
-        const cookie = useCookies()
-        cookie.set("admin-token",res.token)
-        getInfo().then(res=>{
-           console.log(res)
-        })
-      ElNotification({
-        message: '登录成功',
-        type: 'success',
-        })
+    store.dispatch('login',form).then(()=>{
+        toast('登录成功')
         router.push('/')
-    })
-    .finally(()=>{
+    }).finally(()=>{
         loading.value = false
     })
 })
 }
+function onKeyup(e){
+    if(e.key == 'Enter') onSubmit()
+}
+onMounted(()=>{
+    window.addEventListener('keyup',onKeyup)
+})
+onBeforeUnmount(()=>{
+    window.removeEventListener('keyup',onKeyup)
+})
 </script>
 
 <style scoped>
