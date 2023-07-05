@@ -19,4 +19,7 @@ app.use(ElementPlus)
 import 'virtual:windi.css'
 import './permisson'
 import 'nprogress/nprogress.css'
+
+import permission from './directives/permission'
+app.use(permission)
 app.mount('#app')

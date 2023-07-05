@@ -78,4 +78,8 @@ const {
     cursor: not-allowed;
     @apply text-gray-300;
 }
+
+:deep(.el-icon--right) {
+    margin-left: 0;
+}
 </style>

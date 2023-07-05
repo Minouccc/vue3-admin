@@ -11,11 +11,7 @@ export function useTagList() {
         {
             title: '后台首页',
             path: '/'
-        },
-        {
-            title: '商品管理',
-            path: '/goods/list'
-        },
+        }
     ])
     const addTab = (tab) => {
         let noTab = tabList.value.findIndex(t => t.path == tab.path) == -1
