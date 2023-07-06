@@ -1,8 +1,8 @@
 <template>
     <el-aside width="220px" class="image-aside" v-loading="loading">
         <div class="top">
-            <AsideList :active="item.id == activeId" v-for="(item, index) in list" :key="index"
-                @edit.stop="handleEdit(item)" @delete="handleDelete(item.id)" @click="handleChangeActiveId(item.id)">
+            <AsideList :active="item.id == activeId" v-for="(item, index) in list" :key="index" @edit="handleEdit(item)"
+                @delete="handleDelete(item.id)" @click="handleChangeActiveId(item.id)">
                 {{ item.name }}
             </AsideList>
         </div>
