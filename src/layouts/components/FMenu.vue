@@ -30,12 +30,15 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { useStore } from 'vuex';
 const router = useRouter()
 const store = useStore()
 const route = useRoute()
 const defaultActive = ref(route.path)
+onBeforeRouteUpdate((to, from) => {
+    defaultActive.value = to.path
+})
 //menu是否折叠
 const isCollapse = computed(() => !(store.state.asideWidth == '250px'))
 const asideMenus = computed(() => store.state.menus)

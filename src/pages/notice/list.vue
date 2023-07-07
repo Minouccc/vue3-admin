@@ -1,13 +1,6 @@
 <template>
   <el-card shadow="never" class="border-0">
-    <div class="flex justify-between items-center mb-4">
-      <el-button type="primary" size="small" @click="handleCreate">新增</el-button>
-      <el-tooltip effect="dark" content="刷新数据" placement="top">
-        <el-icon @click="getData">
-          <Refresh />
-        </el-icon>
-      </el-tooltip>
-    </div>
+    <ListHeader @create="handleCreate" @refresh="getData" />
     <el-table :data="tableData" style="width: 100%" v-loading="loading">
       <el-table-column prop="title" label="公告标题" />
       <el-table-column prop="create_time" label="发布时间" width="380" />
@@ -41,13 +34,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
 import { getNoticeList, createNotice, updateNotice, deleteNotice } from '~/api/notice'
 import FormDrawer from '~/components/FormDrawer.vue'
-import { toast } from '~/composables/utils'
 import {
-  useInitTable, useInitForm
+  useInitTable,
+  useInitForm
 } from "~/composables/useCommon"
+import ListHeader from '~/components/ListHeader.vue';
 const {
   tableData,
   loading,
@@ -82,7 +75,6 @@ const {
   update: updateNotice,
   create: createNotice,
 })
-getData()
 
 
 </script>

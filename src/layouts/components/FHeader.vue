@@ -56,7 +56,7 @@
             </el-form-item>
         </el-form>
     </el-drawer> -->
-    <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose="false" @submit="onSubmit">
+    <FormDrawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">
         <el-form :model="form" :rules="rules" ref="formRef" label-width="80px" size="small">
             <el-form-item prop="oldpassword" label="旧密码">
                 <el-input v-model="form.oldpassword">

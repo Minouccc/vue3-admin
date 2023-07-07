@@ -41,6 +41,7 @@ export function useInitTable(opt = {}) {
                 loading.value = false
             })
     }
+    getData()
     // 删除
     const handleDelete = (id) => {
         loading.value = true
